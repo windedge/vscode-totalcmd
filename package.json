@@ -1,0 +1,111 @@
+{
+  "name": "open-in-totalcmd",
+  "displayName": "Open In TotalCmd",
+  "description": "Open current file or project in Total Commander",
+  "version": "1.0.0",
+  "publisher": "windedge",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/windedge/vscode-totalcmd"
+  },
+  "icon": "images/icon.png",
+  "engines": {
+    "vscode": "^1.93.1"
+  },
+  "categories": [
+    "Other",
+    "Programming Languages"
+  ],
+  "keywords": [
+    "totalcmd",
+    "total commander",
+    "switch",
+    "open"
+  ],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "openInTotalCmd.openFile",
+        "title": "Open File in TotalCmd"
+      },
+      {
+        "command": "openInTotalCmd.openProject",
+        "title": "Open Project in TotalCmd"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "openInTotalCmd.openFile",
+        "key": "alt+shift+o",
+        "mac": "alt+shift+o",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "openInTotalCmd.openProject",
+        "key": "alt+shift+p",
+        "mac": "alt+shift+p"
+      }
+    ],
+    "configuration": {
+      "title": "Open In TotalCmd",
+      "properties": {
+        "openInTotalCmd.totalCmdPath": {
+          "type": "string",
+          "default": "",
+          "description": "Total Commander executable path"
+        },
+        "openInTotalCmd.launchParameters": {
+          "type": "string",
+          "default": "/O /T",
+          "description": "Custom launch parameters for Total Commander"
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "openInTotalCmd.openFile",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "openInTotalCmd.openFile",
+          "group": "navigation"
+        },
+        {
+          "command": "openInTotalCmd.openProject",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "pnpm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "pnpm run compile && pnpm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "package": "pnpm vsce package --no-dependencies",
+    "publish": "pnpm vsce publish --no-dependencies"
+  },
+  "packageManager": "pnpm@9.6.0",
+  "devDependencies": {
+    "@types/vscode": "^1.93.1",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.17.0",
+    "@typescript-eslint/parser": "^8.17.0",
+    "eslint": "^9.16.0",
+    "typescript": "^5.7.2",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
+    "@vscode/vsce": "^3.2.1"
+  }
+}
