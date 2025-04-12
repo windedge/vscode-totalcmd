@@ -61,7 +61,7 @@ export function activate(context: vscode.ExtensionContext) {
       return;
     }
 
-    const command = `"${totalCmdPath}" ${launchParams} /L="${dirPath}" /R="${filePath}"`;
+    const command = `"${totalCmdPath}" ${launchParams} "${filePath}"`;
     console.log('Executing command:', command);
 
     try {
